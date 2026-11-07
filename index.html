@@ -1,149 +1,280 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#10151d">
-    <meta name="description" content="A small, fact-based profile of neuromantrice.">
-    <title>About neuromantrice</title>
-    <style>
-      :root {
-        color-scheme: dark;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background: #10151d;
-        color: #edf2f7;
-      }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b12">
+  <meta name="description" content="Neuromantrice — Tanya Tanevska. Technology leadership, human imagination, and the systems shaping tomorrow.">
+  <title>NEUROMANTRICE® — Tanya Tanevska</title>
+  <style>
+    :root {
+      --bg: #080b12;
+      --panel: rgba(15, 22, 34, .78);
+      --ink: #eef5f4;
+      --muted: #9baab3;
+      --cyan: #71f6e2;
+      --pink: #ff5da8;
+      --line: rgba(113, 246, 226, .2);
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; color: var(--ink); background: var(--bg); font-family: var(--sans);
+      line-height: 1.6; overflow-x: hidden;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; z-index: -2; pointer-events: none;
+      background:
+        radial-gradient(ellipse at 78% 18%, rgba(255, 93, 168, .13), transparent 34%),
+        radial-gradient(ellipse at 12% 45%, rgba(36, 214, 202, .12), transparent 38%),
+        linear-gradient(135deg, #080b12 0%, #0b1320 52%, #090b13 100%);
+    }
+    body::after {
+      content: ""; position: fixed; inset: 0; z-index: 5; pointer-events: none; opacity: .12;
+      background: repeating-linear-gradient(to bottom, transparent 0 3px, rgba(255,255,255,.08) 4px);
+      mix-blend-mode: soft-light;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+      padding: 26px 0; border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .brand { font: 700 13px var(--mono); letter-spacing: .18em; color: var(--cyan); }
+    nav { display: flex; gap: 28px; color: var(--muted); font: 11px var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    nav a:hover, .text-link:hover { color: var(--cyan); }
+    .hero { min-height: 690px; display: grid; align-items: center; padding: 86px 0 100px; position: relative; }
+    .hero-grid { display: grid; grid-template-columns: 1.3fr .7fr; gap: 56px; align-items: center; }
+    .eyebrow { color: var(--cyan); font: 11px var(--mono); letter-spacing: .2em; text-transform: uppercase; }
+    h1 {
+      margin: 20px 0 20px; font-size: clamp(54px, 8.4vw, 108px); line-height: .91;
+      letter-spacing: -.075em; font-weight: 760;
+    }
+    h1 span { display: block; color: transparent; -webkit-text-stroke: 1px rgba(238,245,244,.78); }
+    .intro { max-width: 630px; color: #c1cdd0; font-size: clamp(17px, 2vw, 20px); }
+    .intro strong { color: var(--ink); font-weight: 600; }
+    .actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 34px; }
+    .button {
+      display: inline-flex; align-items: center; gap: 12px; padding: 13px 18px;
+      border: 1px solid var(--cyan); color: var(--cyan); font: 11px var(--mono);
+      letter-spacing: .1em; text-transform: uppercase; transition: .2s ease;
+    }
+    .button.primary { color: #06110f; background: var(--cyan); }
+    .button:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(113,246,226,.14); }
+    .orbital {
+      aspect-ratio: 1; max-width: 360px; width: 100%; margin: auto; position: relative;
+      border: 1px solid rgba(113,246,226,.24); border-radius: 50%;
+      background: radial-gradient(circle, rgba(113,246,226,.11), rgba(255,93,168,.045) 42%, transparent 68%);
+      box-shadow: 0 0 90px rgba(45,220,203,.08), inset 0 0 70px rgba(255,93,168,.06);
+    }
+    .orbital::before, .orbital::after {
+      content: ""; position: absolute; inset: 12%; border: 1px solid rgba(255,93,168,.42);
+      border-radius: 50%; transform: rotate(-28deg) scaleY(.45);
+    }
+    .orbital::after { inset: 1%; border-color: rgba(113,246,226,.34); transform: rotate(55deg) scaleY(.5); }
+    .core {
+      position: absolute; inset: 35%; border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #d7fff8, #71f6e2 20%, #147f83 56%, #101b2b 75%);
+      box-shadow: 0 0 45px rgba(113,246,226,.45), 0 0 100px rgba(113,246,226,.15);
+    }
+    .orbit-label { position: absolute; font: 10px var(--mono); letter-spacing: .12em; color: var(--muted); }
+    .orbit-label.one { top: 10%; right: -8%; }
+    .orbit-label.two { bottom: 14%; left: -12%; color: var(--pink); }
+    .scroll-note { position: absolute; bottom: 28px; left: 0; color: #6f7f89; font: 10px var(--mono); letter-spacing: .18em; }
+    .scroll-note::before { content: ""; display: inline-block; width: 35px; height: 1px; background: var(--cyan); vertical-align: middle; margin-right: 12px; }
+    section { padding: 92px 0; border-top: 1px solid rgba(255,255,255,.08); }
+    .section-head { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; margin-bottom: 38px; }
+    .section-no { color: var(--pink); font: 11px var(--mono); letter-spacing: .16em; }
+    h2 { margin: 0; font-size: clamp(30px, 4vw, 48px); letter-spacing: -.045em; line-height: 1.05; }
+    .about-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 70px; }
+    .big-quote { color: var(--cyan); font-size: clamp(23px, 3vw, 34px); line-height: 1.25; letter-spacing: -.035em; }
+    .body-copy { color: var(--muted); max-width: 660px; }
+    .body-copy p { margin: 0 0 18px; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .card {
+      min-height: 220px; padding: 26px; border: 1px solid var(--line); background: var(--panel);
+      position: relative; overflow: hidden;
+    }
+    .card::after { content: ""; position: absolute; width: 120px; height: 120px; right: -65px; bottom: -65px; border: 1px solid rgba(255,93,168,.4); border-radius: 50%; }
+    .card .tag { color: var(--pink); font: 10px var(--mono); letter-spacing: .15em; }
+    .card h3 { margin: 26px 0 10px; font-size: 21px; letter-spacing: -.03em; }
+    .card p { margin: 0; color: var(--muted); font-size: 14px; }
+    .origin {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 55px; align-items: center;
+      padding: 34px; border: 1px solid rgba(255,93,168,.3);
+      background: linear-gradient(120deg, rgba(255,93,168,.07), rgba(113,246,226,.045));
+    }
+    .book-mark { font: 700 clamp(32px, 5vw, 58px) var(--mono); color: var(--pink); letter-spacing: -.08em; }
+    .origin p { color: #bdc8cd; margin: 0; }
+    .origin cite { display: block; margin-top: 18px; color: var(--cyan); font: 11px var(--mono); font-style: normal; letter-spacing: .12em; }
+    .contact {
+      display: flex; align-items: end; justify-content: space-between; gap: 30px;
+      padding: 45px; border: 1px solid var(--line); background: rgba(13,20,31,.7);
+    }
+    .contact h2 { max-width: 580px; }
+    .contact p { color: var(--muted); }
+    footer { padding: 28px 0 42px; display: flex; justify-content: space-between; gap: 20px; color: #687984; font: 10px var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    .glow { color: var(--cyan); }
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 36px, 600px); }
+      .topbar { align-items: flex-start; }
+      nav { gap: 12px; flex-wrap: wrap; justify-content: flex-end; font-size: 9px; }
+      .hero { min-height: auto; padding: 76px 0 100px; }
+      .hero-grid, .about-grid, .origin { grid-template-columns: 1fr; gap: 38px; }
+      .orbital { max-width: 230px; }
+      .cards { grid-template-columns: 1fr; }
+      .card { min-height: 175px; }
+      section { padding: 70px 0; }
+      .section-head { display: block; }
+      .section-no { display: block; margin-bottom: 14px; }
+      .contact { display: block; padding: 28px; }
+      footer { display: block; line-height: 2.2; }
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .orbital { animation: float 12s ease-in-out infinite; }
+      .core { animation: pulse 5s ease-in-out infinite alternate; }
+      @keyframes float { 50% { transform: translateY(-10px) rotate(3deg); } }
+      @keyframes pulse { to { transform: scale(1.08); filter: hue-rotate(18deg); } }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap topbar">
+    <a class="brand" href="#top" aria-label="Neuromantrice home">N<span class="glow">/</span>M</a>
+    <nav aria-label="Main navigation">
+      <a href="#about">About</a>
+      <a href="#signals">Signals</a>
+      <a href="#origin">Origin story</a>
+      <a href="#contact">Connect</a>
+    </nav>
+  </header>
 
-      * {
-        box-sizing: border-box;
-      }
+  <main id="top">
+    <section class="wrap hero" style="border-top:0">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Independent signal // Human · Digital</div>
+          <h1>HELLO,<span>FUTURE.</span></h1>
+          <p class="intro">
+            I’m <strong>Tanya Tanevska</strong>, a technology leader at
+            <strong>The Coca-Cola Company</strong>. I work where technology,
+            people and possibility meet, turning complexity into momentum.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="#about">Explore the signal <span>↘</span></a>
+            <a class="button" href="#contact">Make a connection <span>↗</span></a>
+          </div>
+        </div>
+        <div class="orbital" aria-label="Abstract glowing orbital artwork" role="img">
+          <div class="core"></div>
+          <span class="orbit-label one">HUMAN × MACHINE</span>
+          <span class="orbit-label two">IMAGINATION.EXE</span>
+        </div>
+      </div>
+      <div class="scroll-note">SCROLL TO EXPLORE</div>
+    </section>
 
-      body {
-        min-height: 100vh;
-        margin: 0;
-        display: grid;
-        place-items: center;
-        padding: 2rem 1.25rem;
-        background:
-          radial-gradient(ellipse at 12% 8%, #24354a 0, transparent 38rem),
-          #10151d;
-      }
+    <section id="about">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-no">01 / THE OPERATOR</span>
+          <h2>Technology is the tool.<br><span class="glow">People are the point.</span></h2>
+        </div>
+        <div class="about-grid">
+          <div class="big-quote">“The interesting future is the one we build together.”</div>
+          <div class="body-copy">
+            <p>
+              I’m Tanya: technology leader, curious by default, and a believer
+              in making the complicated useful. My work at The Coca-Cola Company
+              sits in a world where platforms, transformation and human ambition
+              have to move in the same direction.
+            </p>
+            <p>
+              This space is my little corner of the network: a place for ideas,
+              experiments, observations and the occasional transmission from
+              the edge of tomorrow.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      main {
-        width: min(100%, 48rem);
-        padding: clamp(1.5rem, 5vw, 3.5rem);
-        border: 1px solid #344252;
-        border-radius: 1.25rem;
-        background: rgb(20 27 37 / 94%);
-        box-shadow: 0 2rem 6rem rgb(0 0 0 / 28%);
-      }
+    <section id="signals">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-no">02 / ACTIVE FREQUENCIES</span>
+          <h2>Things worth thinking about.</h2>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <div class="tag">SIGNAL_001</div>
+            <h3>Technology & transformation</h3>
+            <p>Making technology meaningful: connecting strategy, systems and the people who bring them to life.</p>
+          </article>
+          <article class="card">
+            <div class="tag">SIGNAL_002</div>
+            <h3>Digital culture</h3>
+            <p>How our tools reshape the way we work, create, communicate and understand the world.</p>
+          </article>
+          <article class="card">
+            <div class="tag">SIGNAL_003</div>
+            <h3>Future thinking</h3>
+            <p>Staying curious about what’s next, while keeping both feet firmly in the human present.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-      .eyebrow {
-        margin: 0 0 0.75rem;
-        color: #86d8c1;
-        font-size: 0.8rem;
-        font-weight: 700;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-      }
+    <section id="origin">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-no">03 / ROOT DIRECTORY</span>
+          <h2>A name from another future.</h2>
+        </div>
+        <div class="origin">
+          <div>
+            <div class="book-mark">NEURO<br>MANTRICE</div>
+            <div class="eyebrow" style="margin-top:18px">HANDLE ORIGIN // TEENAGE YEARS</div>
+          </div>
+          <div>
+            <p>
+              The name <em>Neuromantrice</em> began with William Gibson’s
+              <em>Neuromancer</em>, a favourite book from my teenage years.
+              Its world felt less like distant science fiction and more like
+              a possible plotline for my own life. The nickname stayed.
+              The future kept arriving.
+            </p>
+            <cite>INSPIRED BY WILLIAM GIBSON’S NEUROMANCER</cite>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      h1 {
-        margin: 0;
-        font-size: clamp(2.5rem, 9vw, 4.5rem);
-        letter-spacing: -0.06em;
-        line-height: 1;
-      }
+    <section id="contact">
+      <div class="wrap">
+        <div class="contact">
+          <div>
+            <div class="eyebrow">04 / OPEN CHANNEL</div>
+            <h2>Good ideas travel.<br><span class="glow">Let’s exchange signals.</span></h2>
+            <p>For conversations, collaborations or a thoughtful hello.</p>
+          </div>
+          <a class="button primary" href="https://www.linkedin.com/search/results/people/?keywords=Tanya%20Tanevska" target="_blank" rel="noopener noreferrer">
+            Find me on LinkedIn <span>↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-      .intro {
-        max-width: 38rem;
-        margin: 1.5rem 0 2.5rem;
-        color: #c3ceda;
-        font-size: 1.15rem;
-        line-height: 1.7;
-      }
-
-      section {
-        padding-top: 1.5rem;
-        border-top: 1px solid #344252;
-      }
-
-      h2 {
-        margin: 0 0 1rem;
-        font-size: 1.1rem;
-      }
-
-      ul {
-        display: grid;
-        gap: 1rem;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-      }
-
-      li {
-        color: #c3ceda;
-        line-height: 1.6;
-      }
-
-      li strong {
-        color: #edf2f7;
-      }
-
-      a {
-        color: #86d8c1;
-        text-underline-offset: 0.2em;
-      }
-
-      a:hover {
-        color: #b0f0df;
-      }
-
-      .note {
-        margin: 1.25rem 0 0;
-        color: #aab7c5;
-        font-size: 0.95rem;
-        line-height: 1.6;
-      }
-    </style>
-  </head>
-  <body>
-    <main>
-      <p class="eyebrow">A profile, based on what’s public here</p>
-      <h1>neuromantrice</h1>
-      <p class="intro">
-        A concise page about the GitHub account <strong>neuromantrice</strong>—
-        limited to information available in this repository.
-      </p>
-
-      <section aria-labelledby="known-heading">
-        <h2 id="known-heading">What I can confirm</h2>
-        <ul>
-          <li>
-            <strong>GitHub handle:</strong>
-            <a href="https://github.com/neuromantrice">github.com/neuromantrice</a>
-          </li>
-          <li>
-            <strong>Profile repository:</strong>
-            <a href="https://github.com/neuromantrice/neuromantrice">
-              neuromantrice/neuromantrice
-            </a>
-            is the special repository whose README appears on the GitHub profile.
-          </li>
-          <li>
-            <strong>Current README:</strong> it opens with “Hi there 👋”.
-          </li>
-        </ul>
-      </section>
-
-      <section aria-labelledby="unknown-heading" style="margin-top: 2rem">
-        <h2 id="unknown-heading">What this repository doesn’t tell me</h2>
-        <p class="note">
-          There’s no confirmed biography, location, role, interests, projects,
-          pronouns, or contact information in the available profile text. The
-          README’s suggested prompts for those details are unfilled, so I won’t
-          guess or present them as facts.
-        </p>
-      </section>
-    </main>
-  </body>
+  <footer class="wrap">
+    <span>© <span id="year"></span> TANYA TANEVSKA · NEUROMANTRICE</span>
+    <span>STAY CURIOUS <span class="glow">///</span> STAY HUMAN</span>
+  </footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>
+
