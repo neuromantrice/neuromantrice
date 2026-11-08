@@ -1,4 +1,4 @@
-## <img width="620" height="348" alt="image" src="https://github.com/user-attachments/assets/c18084c7-a6c8-47d6-8ed9-f3cdead65f4b" />
+## (づ๑•ᴗ•๑)づ
 
 
 <!--
